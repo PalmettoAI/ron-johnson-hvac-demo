@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Ron Johnson HVAC | Lexington, SC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --blue:      #0047FF;
+    --blue-dk:   #0035CC;
+    --blue-lt:   #2E6AFF;
+    --blue-dim:  rgba(0,71,255,0.08);
+    --white:     #FFFFFF;
+    --off:       #F4F6FA;
+    --light:     #EEF1F8;
+    --border:    #DDE2EE;
+    --charcoal:  #111827;
+    --dark:      #1E293B;
+    --mid:       #64748B;
+    --muted:     #94A3B8;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--white);color:var(--charcoal);font-family:'Space Grotesk',sans-serif;font-weight:300;overflow-x:hidden;}
+
+  /* DEMO BANNER */
+  .demo-banner{background:var(--charcoal);padding:.55rem 2rem;display:flex;align-items:center;justify-content:center;gap:1.5rem;position:sticky;top:0;z-index:9999;}
+  .demo-banner p{font-size:.7rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.5);}
+  .demo-banner a{font-size:.7rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:#6EA8FF;text-decoration:none;border-bottom:1px solid rgba(110,168,255,.3);white-space:nowrap;}
+  .demo-div{width:1px;height:.9rem;background:rgba(255,255,255,.15);}
+
+  /* TOP STRIP */
+  .top-strip{background:var(--blue);padding:.6rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.5rem;}
+  .ts-item{display:flex;align-items:center;gap:.5rem;font-size:.72rem;font-weight:500;color:rgba(255,255,255,.8);}
+  .ts-item strong{color:white;font-weight:600;}
+
+  /* NAV */
+  nav{position:sticky;top:56px;z-index:100;background:var(--white);border-bottom:1px solid var(--border);padding:1.1rem 5rem;display:flex;align-items:center;justify-content:space-between;}
+  .nav-brand{display:flex;align-items:center;gap:1rem;}
+  .brand-initials{width:2.8rem;height:2.8rem;background:var(--blue);color:white;font-family:'Space Mono',monospace;font-size:.9rem;font-weight:700;display:flex;align-items:center;justify-content:center;letter-spacing:.02em;}
+  .brand-name{font-size:1.05rem;font-weight:700;color:var(--charcoal);letter-spacing:-.02em;line-height:1.1;}
+  .brand-sub{font-size:.58rem;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+  .nav-links{display:flex;gap:2.5rem;list-style:none;}
+  .nav-links a{font-size:.75rem;font-weight:500;letter-spacing:.04em;color:var(--mid);text-decoration:none;transition:color .2s;}
+  .nav-links a:hover{color:var(--blue);}
+  .nav-right{display:flex;align-items:center;gap:1rem;}
+  .nav-tel{font-family:'Space Mono',monospace;font-size:.9rem;font-weight:700;color:var(--charcoal);text-decoration:none;transition:color .2s;}
+  .nav-tel:hover{color:var(--blue);}
+  .nav-cta{background:var(--blue);color:white;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.75rem 1.8rem;text-decoration:none;border-radius:2px;transition:all .3s;}
+  .nav-cta:hover{background:var(--blue-dk);transform:translateY(-1px);}
+
+  /* HERO */
+  .hero{background:var(--white);display:grid;grid-template-columns:1fr 1fr;min-height:calc(100vh - 88px);overflow:hidden;}
+
+  .hero-left{padding:7rem 5rem;display:flex;flex-direction:column;justify-content:center;border-right:1px solid var(--border);}
+
+  .h-tag{display:inline-flex;align-items:center;gap:.6rem;background:var(--blue-dim);border:1px solid rgba(0,71,255,.15);padding:.4rem 1rem;margin-bottom:2.5rem;width:fit-content;border-radius:2px;opacity:0;animation:fadeUp .5s .1s forwards;}
+  .h-tag-dot{width:5px;height:5px;background:var(--blue);border-radius:50%;animation:blink 1.4s infinite;}
+  @keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+  .h-tag-text{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+
+  .hero-title{font-size:clamp(2.8rem,5vw,6rem);font-weight:700;line-height:.95;letter-spacing:-.04em;color:var(--charcoal);margin-bottom:2rem;opacity:0;animation:fadeUp .5s .2s forwards;}
+  .hero-title .line-blue{color:var(--blue);}
+  .hero-title .line-mono{font-family:'Space Mono',monospace;font-size:.75em;font-weight:400;color:var(--muted);display:block;letter-spacing:-.02em;}
+
+  .hero-body{font-size:1rem;line-height:1.8;color:var(--mid);max-width:44ch;margin-bottom:3rem;opacity:0;animation:fadeUp .5s .35s forwards;}
+  .hero-body strong{color:var(--charcoal);font-weight:600;}
+
+  .hero-actions{display:flex;gap:1rem;flex-wrap:wrap;opacity:0;animation:fadeUp .5s .5s forwards;}
+  .btn-blue{background:var(--blue);color:white;font-size:.78rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:1.1rem 2.5rem;text-decoration:none;border-radius:2px;transition:all .3s;display:inline-flex;align-items:center;gap:.5rem;border:2px solid var(--blue);}
+  .btn-blue:hover{background:var(--blue-dk);border-color:var(--blue-dk);transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,71,255,.2);}
+  .btn-outline{border:2px solid var(--border);color:var(--mid);font-size:.78rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:1.1rem 2rem;text-decoration:none;border-radius:2px;transition:all .3s;}
+  .btn-outline:hover{border-color:var(--blue);color:var(--blue);}
+
+  .hero-data{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin-top:4rem;padding-top:3rem;border-top:1px solid var(--border);opacity:0;animation:fadeUp .5s .65s forwards;}
+  .hd-item{padding-right:2rem;border-right:1px solid var(--border);}
+  .hd-item:last-child{border-right:none;padding-left:2rem;padding-right:0;}
+  .hd-item:nth-child(2){padding:0 2rem;}
+  .hd-num{font-family:'Space Mono',monospace;font-size:1.8rem;font-weight:700;color:var(--blue);display:block;line-height:1;letter-spacing:-.02em;}
+  .hd-label{font-size:.62rem;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);margin-top:.35rem;}
+
+  /* Hero right */
+  .hero-right{background:var(--off);position:relative;overflow:hidden;display:flex;flex-direction:column;justify-content:flex-end;padding:4rem;opacity:0;animation:fadeIn .7s .4s forwards;}
+  /* Grid pattern */
+  .hero-right::before{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--border) 1px,transparent 1px),linear-gradient(90deg,var(--border) 1px,transparent 1px);background-size:40px 40px;opacity:.6;pointer-events:none;}
+  .blue-block{position:absolute;top:0;right:0;width:180px;height:180px;background:var(--blue);clip-path:polygon(100% 0,0 0,100% 100%);}
+  .blue-block-sm{position:absolute;bottom:200px;left:0;width:4px;height:80px;background:var(--blue);}
+
+  .service-chips{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:2rem;position:relative;z-index:1;}
+  .sc{background:var(--white);border:1px solid var(--border);color:var(--mid);font-size:.7rem;font-weight:500;letter-spacing:.08em;padding:.45rem 1rem;border-radius:2px;transition:all .3s;}
+  .sc.on{background:var(--blue);border-color:var(--blue);color:white;font-weight:600;}
+  .sc:hover{border-color:var(--blue);color:var(--blue);}
+  .sc.on:hover{background:var(--blue-lt);}
+
+  .cta-card{background:var(--white);border:1px solid var(--border);padding:2.5rem;position:relative;z-index:1;box-shadow:0 4px 24px rgba(0,0,0,.06);}
+  .cc-top{display:flex;align-items:center;gap:.6rem;margin-bottom:1.2rem;}
+  .cc-dot{width:8px;height:8px;background:var(--blue);border-radius:50%;animation:blink 1.4s infinite;}
+  .cc-status{font-size:.65rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--blue);}
+  .cc-title{font-size:1.25rem;font-weight:700;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:.4rem;}
+  .cc-sub{font-size:.85rem;color:var(--mid);margin-bottom:1.5rem;line-height:1.6;}
+  .cc-phone{font-family:'Space Mono',monospace;font-size:2rem;font-weight:700;color:var(--blue);text-decoration:none;display:block;letter-spacing:-.02em;transition:color .2s;}
+  .cc-phone:hover{color:var(--blue-dk);}
+  .cc-hours{font-size:.68rem;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-top:.3rem;}
+
+  /* SERVICES */
+  .services-section{padding:9rem 5rem;background:var(--white);border-top:1px solid var(--border);}
+  .s-inner{max-width:1400px;margin:0 auto;}
+  .sec-eyebrow{font-size:.65rem;font-weight:600;letter-spacing:.26em;text-transform:uppercase;color:var(--blue);margin-bottom:1rem;display:flex;align-items:center;gap:.8rem;}
+  .sec-eyebrow::before{content:'';display:block;width:2.5rem;height:2px;background:var(--blue);}
+  .sec-title{font-size:clamp(2.5rem,4.5vw,5rem);font-weight:700;line-height:.95;letter-spacing:-.04em;color:var(--charcoal);margin-bottom:1rem;}
+  .sec-title span{color:var(--blue);}
+  .sec-sub{font-size:1rem;line-height:1.8;color:var(--mid);max-width:52ch;margin-bottom:4rem;}
+
+  .svc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;}
+  .svc-card{border:1px solid var(--border);padding:2.8rem 2.5rem;background:var(--white);transition:all .3s;position:relative;border-radius:2px;}
+  .svc-card::after{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--blue);transform:scaleY(0);transform-origin:bottom;transition:transform .4s;border-radius:2px 0 0 2px;}
+  .svc-card:hover{border-color:rgba(0,71,255,.2);transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,71,255,.08);}
+  .svc-card:hover::after{transform:scaleY(1);}
+  .svc-icon{font-size:2rem;margin-bottom:1.5rem;display:block;}
+  .svc-num{font-family:'Space Mono',monospace;font-size:.7rem;color:var(--muted);margin-bottom:.8rem;display:block;letter-spacing:.1em;}
+  .svc-title{font-size:1.2rem;font-weight:700;letter-spacing:-.02em;color:var(--charcoal);margin-bottom:.6rem;}
+  .svc-desc{font-size:.88rem;line-height:1.8;color:var(--mid);}
+
+  /* ABOUT */
+  .about-section{padding:9rem 5rem;background:var(--dark);overflow:hidden;position:relative;}
+  .about-section::after{content:'HVAC';font-family:'Space Mono',monospace;font-size:30vw;font-weight:700;color:rgba(255,255,255,.02);position:absolute;right:-3vw;bottom:-6vw;line-height:1;pointer-events:none;letter-spacing:-.05em;}
+  .a-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center;position:relative;z-index:1;}
+  .about-content .sec-eyebrow{color:#6EA8FF;}
+  .about-content .sec-eyebrow::before{background:#6EA8FF;}
+  .about-content .sec-title{color:white;margin-bottom:1.5rem;}
+  .about-content .sec-title span{color:#6EA8FF;}
+  .a-body{font-size:1rem;line-height:1.85;color:rgba(255,255,255,.5);margin-bottom:1.5rem;}
+  .a-list{display:flex;flex-direction:column;gap:.6rem;margin-top:2rem;}
+  .a-item{display:flex;align-items:center;gap:1rem;padding:1rem 1.5rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);transition:border-color .3s;border-radius:2px;}
+  .a-item:hover{border-color:rgba(0,71,255,.4);}
+  .a-check{color:#6EA8FF;font-family:'Space Mono',monospace;font-size:.85rem;flex-shrink:0;}
+  .a-text{font-size:.88rem;color:rgba(255,255,255,.7);}
+  .about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(255,255,255,.06);}
+  .as-box{background:var(--dark);padding:3rem 2.5rem;transition:background .3s;}
+  .as-box:hover{background:rgba(0,71,255,.1);}
+  .as-box.blue{background:var(--blue);}
+  .as-num{font-family:'Space Mono',monospace;font-size:3.2rem;font-weight:700;color:#6EA8FF;display:block;line-height:1;letter-spacing:-.03em;}
+  .as-box.blue .as-num{color:white;}
+  .as-label{font-size:.65rem;font-weight:500;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:.5rem;}
+  .as-box.blue .as-label{color:rgba(255,255,255,.75);}
+
+  /* CONTACT */
+  .contact-section{padding:9rem 5rem;background:var(--off);border-top:1px solid var(--border);}
+  .c-inner{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:1fr 1.1fr;gap:7rem;}
+  .c-left .sec-title{margin-bottom:2rem;}
+  .c-blocks{display:flex;flex-direction:column;gap:1px;background:var(--border);}
+  .c-item{display:flex;align-items:center;gap:1.2rem;padding:1.5rem;background:var(--white);transition:background .2s;}
+  .c-item:hover{background:var(--light);}
+  .c-icon{width:2.8rem;height:2.8rem;background:var(--blue-dim);border:1px solid rgba(0,71,255,.15);display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;border-radius:2px;}
+  .c-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:.2rem;}
+  .c-val{font-size:.9rem;font-weight:500;color:var(--charcoal);}
+  .contact-form{display:flex;flex-direction:column;gap:1.1rem;background:var(--white);border:1px solid var(--border);padding:3rem;border-radius:2px;box-shadow:0 4px 24px rgba(0,0,0,.04);}
+  .cf-top-bar{height:3px;background:var(--blue);margin:-3rem -3rem 2rem;border-radius:2px 2px 0 0;}
+  .cf-title{font-size:1.5rem;font-weight:700;letter-spacing:-.03em;color:var(--charcoal);margin-bottom:.3rem;}
+  .cf-sub{font-size:.85rem;color:var(--muted);margin-bottom:.5rem;}
+  .cf-row{display:grid;grid-template-columns:1fr 1fr;gap:1.1rem;}
+  .cf-group{display:flex;flex-direction:column;gap:.35rem;}
+  .cf-label{font-size:.6rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);}
+  .cf-input,.cf-select,.cf-textarea{background:var(--off);border:1px solid var(--border);color:var(--charcoal);padding:.85rem 1rem;font-family:'Space Grotesk',sans-serif;font-size:.9rem;font-weight:400;outline:none;width:100%;border-radius:2px;transition:border-color .3s,background .3s;}
+  .cf-input:focus,.cf-select:focus,.cf-textarea:focus{border-color:var(--blue);background:var(--white);}
+  .cf-select option{background:white;}
+  .cf-textarea{min-height:100px;resize:vertical;}
+  .cf-submit{background:var(--blue);color:white;font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;padding:1.1rem;border:none;cursor:pointer;border-radius:2px;font-family:'Space Grotesk',sans-serif;transition:all .3s;}
+  .cf-submit:hover{background:var(--blue-dk);transform:translateY(-1px);}
+
+  /* REVIEWS */
+  .reviews-section{padding:9rem 5rem;background:var(--white);border-top:1px solid var(--border);}
+  .r-inner{max-width:1400px;margin:0 auto;}
+  .reviews-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:4rem;}
+  .rv-card{background:var(--off);border:1px solid var(--border);padding:2.5rem;border-radius:2px;transition:all .3s;}
+  .rv-card:hover{transform:translateY(-3px);box-shadow:0 12px 36px rgba(0,71,255,.07);border-color:rgba(0,71,255,.2);}
+  .rv-stars{color:var(--blue);font-size:.9rem;letter-spacing:.1em;margin-bottom:1rem;}
+  .rv-text{font-size:.92rem;line-height:1.75;color:var(--mid);margin-bottom:1.5rem;}
+  .rv-div{height:1px;background:var(--border);margin-bottom:1rem;}
+  .rv-author{font-family:'Space Mono',monospace;font-size:.65rem;color:var(--muted);}
+
+  /* FOOTER */
+  footer{background:var(--charcoal);padding:2.5rem 5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:3px solid var(--blue);}
+  .f-brand{display:flex;align-items:center;gap:.8rem;}
+  .f-init{width:2.2rem;height:2.2rem;background:var(--blue);color:white;font-family:'Space Mono',monospace;font-size:.75rem;font-weight:700;display:flex;align-items:center;justify-content:center;}
+  .f-name{font-size:.95rem;font-weight:700;color:white;letter-spacing:-.01em;}
+  .f-copy{font-size:.68rem;color:rgba(255,255,255,.2);}
+  .f-cred{font-size:.62rem;color:rgba(0,71,255,.4);}
+
+  @keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .6s,transform .6s;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media(max-width:960px){
+    .top-strip,.nav-links{display:none;}
+    nav{top:32px;padding:1rem 1.5rem;}
+    .hero{grid-template-columns:1fr;min-height:auto;}
+    .hero-left{padding:4rem 1.5rem;}
+    .hero-right{display:none;}
+    .svc-grid,.reviews-grid{grid-template-columns:1fr;}
+    .a-inner,.c-inner{grid-template-columns:1fr;gap:3rem;}
+    .about-stats{grid-template-columns:1fr 1fr;}
+    .services-section,.about-section,.contact-section,.reviews-section{padding:5rem 1.5rem;}
+    footer{flex-direction:column;text-align:center;padding:2rem 1.5rem;}
+    .cf-row{grid-template-columns:1fr;}
+  }
+</style>
+</head>
+<body>
+
+<div class="demo-banner">
+  <p>⚠ Demo — Built by PalmettoAI</p>
+  <div class="demo-div"></div>
+  <p>Not the live Ron Johnson HVAC website</p>
+  <div class="demo-div"></div>
+  <a href="mailto:tony@palmettoai.com">Get yours → PalmettoAI</a>
+</div>
+
+<div class="top-strip">
+  <span class="ts-item">📍 Serving <strong>Lexington, SC</strong> &amp; surrounding areas</span>
+  <span class="ts-item">⚡ <strong>Same-day service</strong> available</span>
+  <span class="ts-item">📞 Call direct: <strong>(803) 955-9500</strong></span>
+  <span class="ts-item">🛡️ <strong>Licensed &amp; Insured</strong> · SC HVAC Contractor</span>
+</div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="brand-initials">RJ</div>
+    <div>
+      <div class="brand-name">Ron Johnson HVAC</div>
+      <div class="brand-sub">Lexington, SC · Licensed &amp; Insured</div>
+    </div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="tel:8039559500" class="nav-tel">(803) 955-9500</a>
+    <a href="#contact" class="nav-cta">Free Estimate</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="h-tag"><span class="h-tag-dot"></span><span class="h-tag-text">Lexington, SC · Same-Day Available</span></div>
+    <h1 class="hero-title">
+      <span class="line-mono">// heating + cooling</span>
+      Call Ron.<br/>
+      <span class="line-blue">Get It Fixed.</span>
+    </h1>
+    <p class="hero-body"><strong>Ron Johnson HVAC</strong> delivers fast, honest heating and cooling service throughout Lexington, SC. When your system goes down, you need someone who picks up the phone and shows up — that's Ron.</p>
+    <div class="hero-actions">
+      <a href="tel:8039559500" class="btn-blue">📞 (803) 955-9500</a>
+      <a href="#services" class="btn-outline">See Services →</a>
+    </div>
+    <div class="hero-data">
+      <div class="hd-item"><span class="hd-num">24/7</span><span class="hd-label">Emergency Line</span></div>
+      <div class="hd-item"><span class="hd-num">15+</span><span class="hd-label">Yrs Experience</span></div>
+      <div class="hd-item"><span class="hd-num">★ 5.0</span><span class="hd-label">Google Rating</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="blue-block"></div>
+    <div class="blue-block-sm"></div>
+    <div class="service-chips">
+      <span class="sc on">❄️ A/C Repair</span>
+      <span class="sc">Heating</span>
+      <span class="sc on">⚡ Same-Day</span>
+      <span class="sc">Installs</span>
+      <span class="sc">Maintenance</span>
+      <span class="sc">Heat Pumps</span>
+      <span class="sc">Mini-Splits</span>
+      <span class="sc">Air Quality</span>
+    </div>
+    <div class="cta-card">
+      <div class="cc-top"><span class="cc-dot"></span><span class="cc-status">Taking New Clients — Call Direct</span></div>
+      <h3 class="cc-title">Stop searching. Call Ron.</h3>
+      <p class="cc-sub">No hold music, no dispatch center. Ron picks up. Lexington's most direct HVAC call.</p>
+      <a href="tel:8039559500" class="cc-phone">(803) 955-9500</a>
+      <p class="cc-hours">Mon–Sat 7AM–7PM · Emergency: 24/7</p>
+    </div>
+  </div>
+</section>
+
+<section id="services" class="services-section">
+  <div class="s-inner">
+    <p class="sec-eyebrow reveal">Services</p>
+    <h2 class="sec-title reveal">Everything<br/><span>HVAC.</span></h2>
+    <p class="sec-sub reveal">All makes and models. Residential and light commercial. If it heats or cools your space, Ron services it.</p>
+    <div class="svc-grid reveal">
+      <div class="svc-card"><span class="svc-num">// 01</span><span class="svc-icon">❄️</span><h3 class="svc-title">A/C Repair</h3><p class="svc-desc">Not cooling? Warm air? Strange noises? Ron diagnoses and repairs all central air systems — fast. Same-day service available most days in Lexington.</p></div>
+      <div class="svc-card"><span class="svc-num">// 02</span><span class="svc-icon">🔥</span><h3 class="svc-title">Heating Repair</h3><p class="svc-desc">Gas furnaces, heat pumps, electric systems — if it's not keeping you warm, Ron finds the problem and fixes it. Emergency heat calls answered 24/7.</p></div>
+      <div class="svc-card"><span class="svc-num">// 03</span><span class="svc-icon">🏠</span><h3 class="svc-title">System Installation</h3><p class="svc-desc">Honest advice on replacement vs. repair. Fair pricing on new equipment. We size the system right and install it right — no overselling, no shortcuts.</p></div>
+      <div class="svc-card"><span class="svc-num">// 04</span><span class="svc-icon">🔧</span><h3 class="svc-title">Preventive Maintenance</h3><p class="svc-desc">Spring and fall tune-ups that catch small problems before summer or winter hits. Most breakdowns are preventable — our maintenance plan pays for itself.</p></div>
+      <div class="svc-card"><span class="svc-num">// 05</span><span class="svc-icon">💨</span><h3 class="svc-title">Mini-Split Systems</h3><p class="svc-desc">Ductless mini-splits for garages, additions, and sunrooms. Efficient, quiet, and ideal for spaces where running ductwork isn't practical.</p></div>
+      <div class="svc-card"><span class="svc-num">// 06</span><span class="svc-icon">🌬️</span><h3 class="svc-title">Air Quality</h3><p class="svc-desc">UV purifiers, whole-home humidifiers, and high-efficiency filtration. Breathe better in the spaces where you spend most of your time.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="about-section">
+  <div class="a-inner">
+    <div class="about-content">
+      <p class="sec-eyebrow reveal">About Ron</p>
+      <h2 class="sec-title reveal" style="color:white">Local.<br/><span>Honest.</span><br/>Reliable.</h2>
+      <p class="a-body reveal">Ron Johnson has been servicing HVAC systems in Lexington, SC for over 15 years. No franchise, no call center, no runaround. When you call this number, you get Ron — the guy who will actually be at your house.</p>
+      <p class="a-body reveal">Ron built his reputation entirely on referrals and repeat customers. That means every job gets done right, because the next call depends on it.</p>
+      <div class="a-list reveal">
+        <div class="a-item"><span class="a-check">✓</span><span class="a-text">Licensed SC HVAC contractor — fully insured</span></div>
+        <div class="a-item"><span class="a-check">✓</span><span class="a-text">Upfront pricing before any work begins</span></div>
+        <div class="a-item"><span class="a-check">✓</span><span class="a-text">Same-day service available most days</span></div>
+        <div class="a-item"><span class="a-check">✓</span><span class="a-text">100% satisfaction guarantee on every job</span></div>
+      </div>
+    </div>
+    <div class="about-stats reveal">
+      <div class="as-box blue"><span class="as-num">24/7</span><span class="as-label">Emergency</span></div>
+      <div class="as-box"><span class="as-num">15+</span><span class="as-label">Yrs in Lexington</span></div>
+      <div class="as-box"><span class="as-num">500+</span><span class="as-label">Customers Served</span></div>
+      <div class="as-box blue"><span class="as-num">★ 5.0</span><span class="as-label">Avg Rating</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews" class="reviews-section">
+  <div class="r-inner">
+    <p class="sec-eyebrow reveal">Reviews</p>
+    <h2 class="sec-title reveal">What Lexington<br/><span>Customers Say.</span></h2>
+    <div class="reviews-grid reveal">
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"Called Ron on a Sunday afternoon when the AC died. He answered immediately, came out within two hours, and had us back up and running before dinner. Honest price, zero runaround."</p><div class="rv-div"></div><p class="rv-author">// Lexington homeowner</p></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"Ron told me my system was repairable rather than pushing a replacement. That kind of honesty saved me over $4,000. He's the only HVAC guy I'll call going forward."</p><div class="rv-div"></div><p class="rv-author">// Columbia, SC</p></div>
+      <div class="rv-card"><div class="rv-stars">★★★★★</div><p class="rv-text">"Fast, professional, and priced fairly. Ron's been maintaining our system for three years and we've never had a summer breakdown. The preventive maintenance plan is worth every penny."</p><div class="rv-div"></div><p class="rv-author">// Lexington County</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="contact" class="contact-section">
+  <div class="c-inner">
+    <div class="c-left">
+      <p class="sec-eyebrow reveal">Contact</p>
+      <h2 class="sec-title reveal">Let's Get<br/><span>It Fixed.</span></h2>
+      <div class="c-blocks reveal">
+        <div class="c-item"><div class="c-icon">📞</div><div><p class="c-label">Phone</p><p class="c-val">(803) 955-9500</p></div></div>
+        <div class="c-item"><div class="c-icon">📍</div><div><p class="c-label">Service Area</p><p class="c-val">Lexington, Columbia &amp; surrounding SC</p></div></div>
+        <div class="c-item"><div class="c-icon">🕐</div><div><p class="c-label">Hours</p><p class="c-val">Mon–Sat 7AM–7PM · Emergency: 24/7</p></div></div>
+        <div class="c-item"><div class="c-icon">🛡️</div><div><p class="c-label">License</p><p class="c-val">Licensed &amp; Insured SC HVAC Contractor</p></div></div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="handleSubmit(event)">
+      <div class="cf-top-bar"></div>
+      <h3 class="cf-title">Request Service</h3>
+      <p class="cf-sub">We call back within 1 hour during business hours.</p>
+      <div class="cf-row">
+        <div class="cf-group"><label class="cf-label">Name</label><input class="cf-input" type="text" placeholder="Jane Smith" required/></div>
+        <div class="cf-group"><label class="cf-label">Phone</label><input class="cf-input" type="tel" placeholder="(803) 555-0100" required/></div>
+      </div>
+      <div class="cf-group"><label class="cf-label">Service Needed</label>
+        <select class="cf-select cf-input">
+          <option>A/C Not Cooling</option>
+          <option>Heating Issue</option>
+          <option>New System Quote</option>
+          <option>Preventive Maintenance</option>
+          <option>Emergency — Call Me Now</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="cf-group"><label class="cf-label">Address &amp; Details</label><textarea class="cf-textarea cf-input" placeholder="Address and any details about the issue..."></textarea></div>
+      <button type="submit" class="cf-submit">Send Request →</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="f-brand"><div class="f-init">RJ</div><span class="f-name">Ron Johnson HVAC</span></div>
+  <p class="f-copy">© 2026 Ron Johnson HVAC · Lexington, SC · (803) 955-9500</p>
+  <p class="f-cred">Demo built by PalmettoAI · palmettoai.github.io</p>
+</footer>
+
+<script>
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:.07});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+  function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('.cf-submit');b.textContent='✓ Got it — Ron will call you within the hour.';b.style.background='var(--dark)';b.disabled=true;}
+</script>
+</body>
+</html>
