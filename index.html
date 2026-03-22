@@ -211,7 +211,12 @@
     .services-section,.about-section,.contact-section,.reviews-section{padding:5rem 1.5rem;}
     footer{flex-direction:column;text-align:center;padding:2rem 1.5rem;}
     .cf-row{grid-template-columns:1fr;}
+    .nav-right{display:none;}
+    .nav-hamburger{display:flex;}
+    .nav-links.nav-open{display:flex;flex-direction:column;list-style:none;position:absolute;top:100%;left:0;right:0;background:var(--white);padding:1.5rem 2rem;border-top:1px solid var(--border);gap:1.2rem;z-index:99;}
   }
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:4px;}
+  .nav-hamburger span{display:block;width:24px;height:2px;background:var(--blue);transition:all .3s;}
 </style>
 </head>
 <body>
@@ -245,6 +250,7 @@
     <li><a href="#contact">Contact</a></li>
     <li><a href="#reviews">Reviews</a></li>
   </ul>
+  <button class="nav-hamburger" aria-label="Menu"><span></span><span></span><span></span></button>
   <div class="nav-right">
     <a href="tel:8039559500" class="nav-tel">(803) 955-9500</a>
     <a href="#contact" class="nav-cta">Free Estimate</a>
@@ -387,6 +393,7 @@
 </footer>
 
 <script>
+  document.querySelector('.nav-hamburger').addEventListener('click',function(){document.querySelector('.nav-links').classList.toggle('nav-open');});
   const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('visible'),i*80);obs.unobserve(e.target);}});},{threshold:.07});
   document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
   function handleSubmit(e){e.preventDefault();const b=e.target.querySelector('.cf-submit');b.textContent='✓ Got it — Ron will call you within the hour.';b.style.background='var(--dark)';b.disabled=true;}
